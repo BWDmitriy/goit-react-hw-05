@@ -1,38 +1,17 @@
-import './App.css';
-import axios from 'axios';
-import { Routes, Route } from "react-router-dom";
+// App.jsx
 
-
-
-
-
-
-
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Search from '../Search/Search'; // Переконайтеся, що шлях правильний
 
 function App() {
-
-  const url = 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1';
-
-const options = {
-headers: {
-
- Authorization: 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOTcwOTQxOGQ2NTZhMDNhMWI0ZWQwNzdlMzkyZDA0OCIsInN1YiI6IjY2NDQ4MDlkZjI0NDJkZWJhNjI0MWFjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vJ1U0cFA7kXEaVVVwmgagpjanAVx2duiX60FjQGMlzQ'
- }
-};
-
-axios.get(url, options)
- .then(response => console.log(response))
- .catch(err => console.error(err));
-
-
   return (
-    <div>
+    <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/products" element={<Products />} />
+        {/* Інші маршрути */}
+        <Route path="/search" element={<Search />} />
       </Routes>
-    </div>
+    </Router>
   );
 }
 
