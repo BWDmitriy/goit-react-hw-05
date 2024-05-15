@@ -1,17 +1,17 @@
-// App.jsx
-
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Search from '../Search/Search'; // Переконайтеся, що шлях правильний
+import { Route, Routes } from 'react-router-dom';
+import Navbar from '../Navbar/Navbar';
+import Home from '../Home/Home';
+import Movies from '../Movies/Movies';
 
 function App() {
   return (
-    <Router>
+    <>
+      <Navbar />
       <Routes>
-        {/* Інші маршрути */}
-        <Route path="/search" element={<Search />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/movies" element={<Movies />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 

@@ -1,7 +1,7 @@
-export default function NotFound({ errorMsgClass }) {
+export default function NotFound() {
   return (
-    <div className={errorMsgClass}>
-      Error
+    <div>
+      404 Not found
     </div>
   );
 }
