@@ -21,17 +21,34 @@ h1 {
 
 .movie-container {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
 }
 
 .movie-info {
   width: 100%;
+  flex-grow: 1;
 }
 
 .movie-info ul {
   list-style-type: none;
   padding: 0;
 }
+
+.goBack-button {
+  align-self: start;
+  margin-bottom: 20px;
+}
+
+.movie-content {
+  display: flex;
+  gap: 20px;
+}
+
+.movie-poster {
+  width: 300px; /* Увеличенная ширина изображения */
+  height: auto; /* Автоматическая высота для сохранения пропорций */
+}
+
 /* Navbar.css */
 .navbar {
   display: flex;
