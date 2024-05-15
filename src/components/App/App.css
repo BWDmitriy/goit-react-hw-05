@@ -95,7 +95,7 @@ h1 {
   margin: -1px;
   border: 0;
   padding: 0;
-  
+
   white-space: nowrap;
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
@@ -123,32 +123,46 @@ h1 {
 }
 
 .search-box {
-    background-color: #007bff; 
-    padding: 10px;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    border-radius: 5px;
-    width: 100%; 
-    flex-direction: row-reverse;
+  background-color: #007bff;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 100%;
+  flex-direction: row-reverse;
 }
 
 .search-box input {
-    width: 25%; 
-    padding: 10px;
-    margin-right: 10px; 
-    border: none;
-    border-radius: 5px;
+  width: 25%;
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
 }
 
 .search-box button {
-    background-color: #0056b3; 
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-container {
+  display: flex;
+  gap: 20px;
+}
+
+.movie-info {
+  width: 100%;
+}
+
+.movie-info ul {
+  list-style-type: none;
+  padding: 0;
 }
