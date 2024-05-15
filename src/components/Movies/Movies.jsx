@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
@@ -28,6 +28,9 @@ export default function Movies() {
   // Render movie details or loading state
 return (
   <div className="movie-container">
+    <Link to="/">
+        <button>&larr; Go back</button>
+      </Link>
     {movieDetails && (
       <>
         <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={movieDetails.title} />
