@@ -1,0 +1,154 @@
+/* App.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.App {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+  margin-left: 10px;
+}
+
+/* ContactForm styles */
+.contact-form {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 320px;
+}
+
+.contact-form input,
+.contact-form button {
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.contact-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* SearchBox styles */
+.search-box {
+  margin: 10px;
+  margin-bottom: 20px;
+  width: 320px;
+}
+
+.search-box input {
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* ContactList styles */
+.contact-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px;
+}
+
+.contact-list li {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc((100% - 30px) / 4);
+  border: solid 1px black;
+}
+
+.contact-list li button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.contact-list-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 50px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.search-box {
+    background-color: #007bff; 
+    padding: 10px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border-radius: 5px;
+    width: 100%; 
+    flex-direction: row-reverse;
+}
+
+.search-box input {
+    width: 25%; 
+    padding: 10px;
+    margin-right: 10px; 
+    border: none;
+    border-radius: 5px;
+}
+
+.search-box button {
+    background-color: #0056b3; 
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
