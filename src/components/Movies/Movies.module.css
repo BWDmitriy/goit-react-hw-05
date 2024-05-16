@@ -21,4 +21,16 @@
 
 .movie-info {
   flex-grow: 1; /* Описание занимает оставшееся пространство */
+  display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.movie-genres-list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+.movie-genres-list li {
+  margin-right: 10px;
 }
