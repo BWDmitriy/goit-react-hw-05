@@ -6,6 +6,7 @@ import Navbar from '../Navbar/Navbar';
 // import SearchMovies from '../SearchMovies/SearchMovies';
 import React, { lazy, Suspense } from 'react';
 
+
 const Home = React.lazy(() => import('../Home/Home'));
 const Movies = React.lazy(() => import('../Movies/Movies'));
 const SearchMovies = React.lazy(() => import('../SearchMovies/SearchMovies'));
