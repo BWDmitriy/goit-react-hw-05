@@ -4,7 +4,7 @@ import Navbar from '../Navbar/Navbar';
 // import Home from '../Home/Home';
 // import Movies from '../Movies/Movies';
 // import SearchMovies from '../SearchMovies/SearchMovies';
-import { React, Suspense } from 'react';
+import { lazy, React, Suspense } from 'react';
 const Home = React.lazy(() => import('../Home/Home'));
 const Movies = React.lazy(() => import('../Movies/Movies'));
 const SearchMovies = React.lazy(() => import('../SearchMovies/SearchMovies'));
