@@ -1,0 +1,9 @@
+/* Home.module.css */
+
+.home-container {
+  margin-left: 5px; /* Отступ слева 5px для общего родителя */
+}
+
+.home-title {
+  margin-bottom: 20px; /* Отступ 20px вниз для h1 элемента */
+}

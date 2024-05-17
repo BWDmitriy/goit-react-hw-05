@@ -49,33 +49,4 @@ h1 {
   height: auto; /* Автоматическая высота для сохранения пропорций */
 }
 
-/* Navbar.css */
-.navbar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #f8f9fa;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Затененная полоска снизу */
-  padding: 10px 0;
-}
 
-.navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-.navbar li {
-  margin-right: 20px;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: #343a40;
-  font-size: 18px;
-}
-
-.navbar a:hover {
-  color: #007bff;
-}

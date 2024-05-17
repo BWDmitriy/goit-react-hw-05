@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import styles from './Home.module.css'
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -23,15 +24,15 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Trending movies</h1>
+    <div className={styles['home-container']}> {/* Применение класса к родительскому элементу */}
+      <h1 className={styles['home-title']}>Trending movies</h1> {/* Применение класса к h1 */}
       <ul>
-  {trendingMovies.map((movie) => (
-    <li key={movie.id}>
-      <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-    </li>
-  ))}
-</ul>
+        {trendingMovies.map((movie) => (
+          <li key={movie.id}>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

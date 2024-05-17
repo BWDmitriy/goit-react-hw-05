@@ -27,7 +27,12 @@ const [reviews, setReviews] = useState([]);
       fetchMovieDetails();
     }
   }, [id]);
+// В начале файла Movies.jsx
+
 const fetchCast = async () => {
+  // Сначала очищаем состояние reviews
+  setReviews([]);
+
   try {
     const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits`, {
       params: {
@@ -41,6 +46,9 @@ const fetchCast = async () => {
 };
 
 const fetchReviews = async () => {
+  // Сначала очищаем состояние cast
+  setCast([]);
+
   try {
     const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews`, {
       params: {
@@ -75,33 +83,49 @@ return (
           </div>
         </div>
     )}
+    <hr />
     <p>Additional information</p>
     <ul>
       <li className={styles['link']} onClick={fetchCast}>Cast</li>
       <li className={styles['link']} onClick={fetchReviews}>Reviews</li>
     </ul>
-
+<hr />
     {cast.length > 0 && (
-      <div>
-        <h3>Cast:</h3>
-        <ul>
-          {cast.map(actor => (
-            <li key={actor.id}>{actor.name}</li>
-          ))}
-        </ul>
-      </div>
-    )}
+  <div>
+    <h3>Cast:</h3>
+    <ul>
+  {cast.map(actor => (
+    <li key={actor.id}>
+      {actor.profile_path? (
+        <img 
+          src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} 
+          alt={actor.name} 
+          style={{width: '50px', marginRight: '10px'}}
+        />
+      ) : (
+        <span>No image available</span>
+      )}
+      <span>{actor.name}</span>
+      <p>Character: {actor.character}</p>
+    </li>
+  ))}
+</ul>
+  </div>
+)}
 
     {reviews.length > 0 && (
-      <div>
-        <h3>Reviews:</h3>
-        <ul>
-          {reviews.map(review => (
-            <li key={review.id}>{review.content}</li>
-          ))}
-        </ul>
-      </div>
-    )}
+  <div>
+    <h3>Reviews:</h3>
+    <ul>
+      {reviews.map(review => (
+        <li key={review.id}>
+          <h2>Author: {review.author}</h2>
+          <p>{review.content}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
     </div>
   );
 }

@@ -1,8 +1,13 @@
 .movie-container {
   display: flex;
   flex-direction: column;
+  margin-left: 5px;
 }
-
+.movie-container hr {
+  border: none;
+  border-top: 2px solid #ccc; /* Цвет и толщина линии */
+  margin: 20px 0; /* Отступы сверху и снизу */
+}
 .goBack-button {
   align-self: start;
   margin-bottom: 20px;
