@@ -77,8 +77,8 @@ return (
     )}
     <p>Additional information</p>
     <ul>
-      <li onClick={fetchCast}>Cast</li>
-      <li onClick={fetchReviews}>Reviews</li>
+      <li className={styles['link']} onClick={fetchCast}>Cast</li>
+      <li className={styles['link']} onClick={fetchReviews}>Reviews</li>
     </ul>
 
     {cast.length > 0 && (
