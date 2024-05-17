@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import styles from './Home.module.css'
+import styles from './HomePage.module.css'
+import MovieList from '../../components/MovieList/MovieList';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);

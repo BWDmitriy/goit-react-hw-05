@@ -1,5 +1,5 @@
-/* Navbar.css */
-.navbar {
+/* navigation.css */
+.navigation {
   display: flex;
   /* justify-content: space-around; */
   align-items: center;
@@ -9,23 +9,23 @@
   margin-bottom: 10px;
 }
 
-.navbar ul {
+.navigation ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   display: flex;
 }
 
-.navbar li {
+.navigation li {
   margin-right: 20px;
 }
 
-.navbar a {
+.navigation a {
   text-decoration: none;
   color: #343a40;
   font-size: 18px;
 }
 
-.navbar a:hover {
+.navigation a:hover {
   color: #007bff;
 }

@@ -5,28 +5,34 @@ import styles from "./Movies.module.css";
 
 export default function Movies() {
   let { id } = useParams();
-  const [movieDetails, setMovieDetails] = useState(null);
-  const [cast, setCast] = useState([]);
+const [movieDetails, setMovieDetails] = useState(null);
+const [cast, setCast] = useState([]);
 const [reviews, setReviews] = useState([]);
+const [reviewsFetched, setReviewsFetched] = useState(false); // Исправлено: добавлено состояние reviewsFetched
+const [loadingReviews, setLoadingReviews] = useState(false);
 
-  useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
-          params: {
-            api_key: 'e9709418d656a03a1b4ed077e392d048',
-          },
-        });
-        setMovieDetails(response.data);
-      } catch (error) {
-        console.error("Failed to fetch movie details:", error);
-      }
-    };
-
-    if (id) {
-      fetchMovieDetails();
+useEffect(() => {
+  const fetchMovieDetails = async () => {
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+        params: {
+          api_key: 'e9709418d656a03a1b4ed077e392d048',
+        },
+      });
+      setMovieDetails(response.data);
+    } catch (error) {
+      console.error("Failed to fetch movie details:", error);
     }
-  }, [id]);
+  };
+
+  if (reviewsFetched) {
+    fetchReviews(); // Загружаем отзывы, если было нажатие на кнопку
+  }
+
+  if (id) {
+    fetchMovieDetails();
+  }
+}, [id, reviewsFetched]);
 // В начале файла Movies.jsx
 
 const fetchCast = async () => {
@@ -46,9 +52,8 @@ const fetchCast = async () => {
 };
 
 const fetchReviews = async () => {
-  // Сначала очищаем состояние cast
-  setCast([]);
-
+  setLoadingReviews(true); // Запускаем процесс загрузки
+  setReviewsFetched(true); // Устанавливаем, что запрос на отзывы был сделан
   try {
     const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews`, {
       params: {
@@ -58,6 +63,8 @@ const fetchReviews = async () => {
     setReviews(response.data.results);
   } catch (error) {
     console.error("Failed to fetch reviews:", error);
+  } finally {
+    setLoadingReviews(false); // Завершаем процесс загрузки
   }
 };
   // Render movie details or loading state
@@ -113,19 +120,27 @@ return (
   </div>
 )}
 
-    {reviews.length > 0 && (
-  <div>
-    <h3>Reviews:</h3>
-    <ul>
-      {reviews.map(review => (
-        <li key={review.id}>
-          <h2>Author: {review.author}</h2>
-          <p>{review.content}</p>
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
+    {reviewsFetched? (
+  loadingReviews? (
+    <p>Loading reviews...</p>
+  ) : (
+    reviews.length > 0? (
+      <div>
+        <h3>Reviews:</h3>
+        <ul>
+          {reviews.map(review => (
+            <li key={review.id}>
+              <h2>Author: {review.author}</h2>
+              <p>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : (
+      <p>We don't have any reviews for this movie.</p>
+    )
+  )
+) : null}
     </div>
   );
 }

@@ -1,0 +1,51 @@
+.movie-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+}
+.movie-container hr {
+  border: none;
+  border-top: 2px solid #ccc; /* Цвет и толщина линии */
+  margin: 20px 0; /* Отступы сверху и снизу */
+}
+.goBack-button {
+  align-self: start;
+  margin-bottom: 20px;
+}
+
+.movie-content {
+  display: flex;
+  flex-direction: row; /* Изменено на row для горизонтального расположения */
+  gap: 20px;
+}
+
+.movie-poster {
+  width: 300px; /* Увеличенная ширина изображения */
+  height: auto; /* Автоматическая высота для сохранения пропорций */
+}
+
+.movie-info {
+  flex-grow: 1; /* Описание занимает оставшееся пространство */
+  display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.movie-genres-list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+.movie-genres-list li {
+  margin-right: 10px;
+}
+
+.link {
+  cursor: pointer;
+  color: #007bff; /* Цвет ссылки */
+  text-decoration: underline; /* Подчеркнутый текст */
+}
+
+.link:hover {
+  color: #0056b3; /* Цвет при наведении */
+}

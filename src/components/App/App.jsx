@@ -1,25 +1,23 @@
 // App.jsx
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
-// import Home from '../Home/Home';
-// import Movies from '../Movies/Movies';
-// import SearchMovies from '../SearchMovies/SearchMovies';
+import Navigation from '../Navigation/Navigation';
 import React, { lazy, Suspense } from 'react';
 
-
-const Home = React.lazy(() => import('../Home/Home'));
-const Movies = React.lazy(() => import('../Movies/Movies'));
-const SearchMovies = React.lazy(() => import('../SearchMovies/SearchMovies'));
+const HomePage = React.lazy(() => import('../../pages/HomePage/HomePage')); // Corrected path
+const MoviesPage = React.lazy(() => import('../../pages/MoviesPage/MoviesPage')); // Corrected path
+const MovieDetailsPage = React.lazy(() => import('../../pages/MovieDetailsPage/MovieDetailsPage')); // Corrected path
+const NotFoundPage = React.lazy(() => import('../../pages/NotFoundPage/NotFoundPage')); // Corrected path
 
 function App() {
   return (
     <>
-      <Navbar />
+      <Navigation />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movies/:id" element={<Movies />} /> 
-          <Route path="/movies" element={<SearchMovies />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:id" element={<MovieDetailsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </>
