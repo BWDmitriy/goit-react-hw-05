@@ -5,6 +5,7 @@ import styles from "./MovieDetailsPage.module.css";
 import { useLocation } from 'react-router-dom';
 import MovieReviews from '../../components/MovieReviews/MovieReviews';
 import MovieCast from '../../components/MovieCast/MovieCast';
+import NavLink from '../../components/Navigation/NavLink';
 
 export default function MovieDetailsPage() {
   const location = useLocation();
@@ -89,8 +90,8 @@ return (
             <p>{movieDetails.overview}</p>
             <h2>Genres</h2>
             <ul className={styles['movie-genres-list']}>
-              {movieDetails.genres.map(genre => (
-                <li key={genre.movieId}>{genre.name}</li>
+              {movieDetails.genres.map((genre, index) => (
+                <li key={index}>{genre.name}</li>
               ))}
             </ul>
           </div>
@@ -98,10 +99,14 @@ return (
     )}
     <hr />
     <p>Additional information</p>
-    <ul>
+    <div>
+      <NavLink to={`/movies/${movieId}`} state={{ from }}><button className={styles['link']} onClick={fetchCast}>Cast</button></NavLink>
+      <NavLink to={`/movies/${movieId}`} state={{ from }}><button className={styles['link']} onClick={fetchReviews}>Reviews</button></NavLink>
+    </div>
+    {/* <ul>
       <li className={styles['link']} onClick={fetchCast}>Cast</li>
       <li className={styles['link']} onClick={fetchReviews}>Reviews</li>
-    </ul>
+    </ul> */}
 <hr />
     {cast.length > 0 && (
 //   <div>
