@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import styles from './HomePage.module.css'
-import MovieList from '../../components/MovieList/MovieList';
+import styles from './HomePage.module.css';
+import MovieList from '../../components/MovieList/MovieList'; // Переконайтесь, що шлях до компонента вірний
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -25,15 +25,9 @@ const Home = () => {
   }, []);
 
   return (
-    <div className={styles['home-container']}> {/* Применение класса к родительскому элементу */}
-      <h1 className={styles['home-title']}>Trending movies</h1> {/* Применение класса к h1 */}
-      <ul>
-        {trendingMovies.map((movie) => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-          </li>
-        ))}
-      </ul>
+    <div className={styles['home-container']}>
+      <h1 className={styles['home-title']}>Trending movies</h1>
+      <MovieList movies={trendingMovies} /> {/* Використання компонента MovieList */}
     </div>
   );
 };

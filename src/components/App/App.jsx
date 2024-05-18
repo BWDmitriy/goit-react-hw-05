@@ -3,10 +3,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import React, { lazy, Suspense } from 'react';
 
-const HomePage = React.lazy(() => import('../../pages/HomePage/HomePage')); // Corrected path
-const MoviesPage = React.lazy(() => import('../../pages/MoviesPage/MoviesPage')); // Corrected path
-const MovieDetailsPage = React.lazy(() => import('../../pages/MovieDetailsPage/MovieDetailsPage')); // Corrected path
-const NotFoundPage = React.lazy(() => import('../../pages/NotFoundPage/NotFoundPage')); // Corrected path
+const HomePage = React.lazy(() => import('../../pages/HomePage/HomePage'));
+const MoviesPage = React.lazy(() => import('../../pages/MoviesPage/MoviesPage'));
+const MovieDetailsPage = React.lazy(() => import('../../pages/MovieDetailsPage/MovieDetailsPage'));
+const NotFoundPage = React.lazy(() => import('../../pages/NotFoundPage/NotFoundPage'));
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<MoviesPage />} />
-          <Route path="/movies/:id" element={<MovieDetailsPage />} />
+          <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>

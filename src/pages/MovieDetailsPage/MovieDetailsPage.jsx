@@ -1,10 +1,15 @@
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import styles from "./Movies.module.css";
+import { useState, useEffect, useRef } from 'react';
+import styles from "./MovieDetailsPage.module.css";
+import { useLocation } from 'react-router-dom';
+import MovieReviews from '../../components/MovieReviews/MovieReviews';
+import MovieCast from '../../components/MovieCast/MovieCast';
 
-export default function Movies() {
-  let { id } = useParams();
+export default function MovieDetailsPage() {
+  const location = useLocation();
+  const from = useRef(location.state);
+  let { movieId } = useParams();
 const [movieDetails, setMovieDetails] = useState(null);
 const [cast, setCast] = useState([]);
 const [reviews, setReviews] = useState([]);
@@ -14,7 +19,7 @@ const [loadingReviews, setLoadingReviews] = useState(false);
 useEffect(() => {
   const fetchMovieDetails = async () => {
     try {
-      const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+      const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
         params: {
           api_key: 'e9709418d656a03a1b4ed077e392d048',
         },
@@ -29,18 +34,18 @@ useEffect(() => {
     fetchReviews(); // Загружаем отзывы, если было нажатие на кнопку
   }
 
-  if (id) {
+  if (movieId) {
     fetchMovieDetails();
   }
-}, [id, reviewsFetched]);
-// В начале файла Movies.jsx
+}, [movieId, reviewsFetched]);
+// В начале файла MovieDetailsPage.jsx
 
 const fetchCast = async () => {
   // Сначала очищаем состояние reviews
   setReviews([]);
 
   try {
-    const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits`, {
+    const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
       params: {
         api_key: 'e9709418d656a03a1b4ed077e392d048',
       },
@@ -51,11 +56,12 @@ const fetchCast = async () => {
   }
 };
 
-const fetchReviews = async () => {
+  const fetchReviews = async () => {
+    setCast([]);
   setLoadingReviews(true); // Запускаем процесс загрузки
   setReviewsFetched(true); // Устанавливаем, что запрос на отзывы был сделан
   try {
-    const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews`, {
+    const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews`, {
       params: {
         api_key: 'e9709418d656a03a1b4ed077e392d048',
       },
@@ -84,7 +90,7 @@ return (
             <h2>Genres</h2>
             <ul className={styles['movie-genres-list']}>
               {movieDetails.genres.map(genre => (
-                <li key={genre.id}>{genre.name}</li>
+                <li key={genre.movieId}>{genre.name}</li>
               ))}
             </ul>
           </div>
@@ -98,26 +104,27 @@ return (
     </ul>
 <hr />
     {cast.length > 0 && (
-  <div>
-    <h3>Cast:</h3>
-    <ul>
-  {cast.map(actor => (
-    <li key={actor.id}>
-      {actor.profile_path? (
-        <img 
-          src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} 
-          alt={actor.name} 
-          style={{width: '50px', marginRight: '10px'}}
-        />
-      ) : (
-        <span>No image available</span>
-      )}
-      <span>{actor.name}</span>
-      <p>Character: {actor.character}</p>
-    </li>
-  ))}
-</ul>
-  </div>
+//   <div>
+//     <h3>Cast:</h3>
+//     <ul>
+//   {cast.map((actor, index) => (
+//     <li key={index}>
+//       {actor.profile_path? (
+//         <img
+//           src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+//           alt={actor.name}
+//           style={{width: '50px', marginRight: '10px'}}
+//         />
+//       ) : (
+//         <span>No image available</span>
+//       )}
+//       <span>{actor.name}</span>
+//       <p>Character: {actor.character}</p>
+//     </li>
+//   ))}
+// </ul>
+      //   </div>
+      <MovieCast cast={cast} />
 )}
 
     {reviewsFetched? (
@@ -125,17 +132,18 @@ return (
     <p>Loading reviews...</p>
   ) : (
     reviews.length > 0? (
-      <div>
-        <h3>Reviews:</h3>
-        <ul>
-          {reviews.map(review => (
-            <li key={review.id}>
-              <h2>Author: {review.author}</h2>
-              <p>{review.content}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      // <div>
+      //   <h3>Reviews:</h3>
+      //   <ul>
+      //     {reviews.map(review => (
+      //       <li key={review.movieId}>
+      //         <h2>Author: {review.author}</h2>
+      //         <p>{review.content}</p>
+      //       </li>
+      //     ))}
+      //   </ul>
+            // </div>
+            <MovieReviews reviews={reviews} />
     ) : (
       <p>We don't have any reviews for this movie.</p>
     )
