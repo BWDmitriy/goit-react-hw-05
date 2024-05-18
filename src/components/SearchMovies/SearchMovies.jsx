@@ -1,7 +1,7 @@
 // SearchMovies.jsx
 import { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Импортируем Link
+import { Link } from 'react-router-dom';
 
 const SearchMovies = () => {
   const [query, setQuery] = useState('');
@@ -32,7 +32,7 @@ const SearchMovies = () => {
       <ul>
         {results.map((movie) => (
           <li key={movie.id}>
-            {/* Обертываем название фильма в Link для навигации */}
+            
             <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
           </li>
         ))}

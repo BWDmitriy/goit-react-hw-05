@@ -1,4 +1,3 @@
-// src/components/Navigation/Navigation.jsx
 import NavLink from './NavLink';
 import styles from './Navigation.module.css';
 import { useLocation } from 'react-router-dom';

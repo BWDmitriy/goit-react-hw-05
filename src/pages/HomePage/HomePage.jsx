@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <div className={styles['home-container']}>
       <h1 className={styles['home-title']}>Trending movies</h1>
-      <MovieList movies={trendingMovies} /> {/* Використання компонента MovieList */}
+      <MovieList movies={trendingMovies} /> 
     </div>
   );
 };

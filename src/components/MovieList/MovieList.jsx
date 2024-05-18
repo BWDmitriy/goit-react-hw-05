@@ -11,7 +11,7 @@ const MovieList = ({ movies }) => {
         <li key={movie.id}>
           <Link to={{
             pathname: `/movies/${movie.id}`,
-            state: { from: location } // Передача поточної локалізації як стану
+            state: { from: location } 
           }}>
             {movie.title}
           </Link>

@@ -1,4 +1,3 @@
-// src/components/Navigation/NavLink.jsx
 import { Link } from 'react-router-dom';
 
 const NavLink = ({ to, children }) => {

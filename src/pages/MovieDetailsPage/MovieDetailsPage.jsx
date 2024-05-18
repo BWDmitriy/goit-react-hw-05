@@ -32,17 +32,17 @@ useEffect(() => {
   };
 
   if (reviewsFetched) {
-    fetchReviews(); // Загружаем отзывы, если было нажатие на кнопку
+    fetchReviews(); 
   }
 
   if (movieId) {
     fetchMovieDetails();
   }
 }, [movieId, reviewsFetched]);
-// В начале файла MovieDetailsPage.jsx
+
 
 const fetchCast = async () => {
-  // Сначала очищаем состояние reviews
+
   setReviews([]);
 
   try {
@@ -59,8 +59,8 @@ const fetchCast = async () => {
 
   const fetchReviews = async () => {
     setCast([]);
-  setLoadingReviews(true); // Запускаем процесс загрузки
-  setReviewsFetched(true); // Устанавливаем, что запрос на отзывы был сделан
+  setLoadingReviews(true); 
+  setReviewsFetched(true); 
   try {
     const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews`, {
       params: {
@@ -71,10 +71,10 @@ const fetchCast = async () => {
   } catch (error) {
     console.error("Failed to fetch reviews:", error);
   } finally {
-    setLoadingReviews(false); // Завершаем процесс загрузки
+    setLoadingReviews(false); 
   }
 };
-  // Render movie details or loading state
+
 return (
     <div className={styles['movie-container']}>
       <Link to="/">
