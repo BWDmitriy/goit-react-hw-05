@@ -1,83 +1,38 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import styles from "./MovieDetailsPage.module.css";
 import { useLocation } from 'react-router-dom';
-import MovieReviews from '../../components/MovieReviews/MovieReviews';
-import MovieCast from '../../components/MovieCast/MovieCast';
 import NavLink from '../../components/Navigation/NavLink';
 
 export default function MovieDetailsPage() {
   const location = useLocation();
-  const from = useRef(location.state);
+  const from = useRef(location.state?.from || '/');
   let { movieId } = useParams();
-const [movieDetails, setMovieDetails] = useState(null);
-const [cast, setCast] = useState([]);
-const [reviews, setReviews] = useState([]);
-const [reviewsFetched, setReviewsFetched] = useState(false); // Исправлено: добавлено состояние reviewsFetched
-const [loadingReviews, setLoadingReviews] = useState(false);
+  const [movieDetails, setMovieDetails] = useState(null);
 
-useEffect(() => {
-  const fetchMovieDetails = async () => {
-    try {
-      const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
-        params: {
-          api_key: 'e9709418d656a03a1b4ed077e392d048',
-        },
-      });
-      setMovieDetails(response.data);
-    } catch (error) {
-      console.error("Failed to fetch movie details:", error);
+  useEffect(() => {
+    const fetchMovieDetails = async () => {
+      try {
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+          params: {
+            api_key: 'e9709418d656a03a1b4ed077e392d048',
+          },
+        });
+        setMovieDetails(response.data);
+      } catch (error) {
+        console.error("Failed to fetch movie details:", error);
+      }
+    };
+
+    if (movieId) {
+      fetchMovieDetails();
     }
-  };
+  }, [movieId]);
 
-  if (reviewsFetched) {
-    fetchReviews(); 
-  }
-
-  if (movieId) {
-    fetchMovieDetails();
-  }
-}, [movieId, reviewsFetched]);
-
-
-const fetchCast = async () => {
-
-  setReviews([]);
-
-  try {
-    const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
-      params: {
-        api_key: 'e9709418d656a03a1b4ed077e392d048',
-      },
-    });
-    setCast(response.data.cast);
-  } catch (error) {
-    console.error("Failed to fetch cast:", error);
-  }
-};
-
-  const fetchReviews = async () => {
-    setCast([]);
-  setLoadingReviews(true); 
-  setReviewsFetched(true); 
-  try {
-    const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews`, {
-      params: {
-        api_key: 'e9709418d656a03a1b4ed077e392d048',
-      },
-    });
-    setReviews(response.data.results);
-  } catch (error) {
-    console.error("Failed to fetch reviews:", error);
-  } finally {
-    setLoadingReviews(false); 
-  }
-};
-
-return (
+  return (
     <div className={styles['movie-container']}>
-      <Link to="/">
+      <Link to={from.current}>
         <button className={styles['goBack-button']}>&larr; Go back</button>
       </Link>
       {movieDetails && (
@@ -96,64 +51,15 @@ return (
             </ul>
           </div>
         </div>
-    )}
-    <hr />
-    <p>Additional information</p>
-    <div>
-      <NavLink to={`/movies/${movieId}`} state={{ from }}><button className={styles['link']} onClick={fetchCast}>Cast</button></NavLink>
-      <NavLink to={`/movies/${movieId}`} state={{ from }}><button className={styles['link']} onClick={fetchReviews}>Reviews</button></NavLink>
-    </div>
-    {/* <ul>
-      <li className={styles['link']} onClick={fetchCast}>Cast</li>
-      <li className={styles['link']} onClick={fetchReviews}>Reviews</li>
-    </ul> */}
-<hr />
-    {cast.length > 0 && (
-//   <div>
-//     <h3>Cast:</h3>
-//     <ul>
-//   {cast.map((actor, index) => (
-//     <li key={index}>
-//       {actor.profile_path? (
-//         <img
-//           src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-//           alt={actor.name}
-//           style={{width: '50px', marginRight: '10px'}}
-//         />
-//       ) : (
-//         <span>No image available</span>
-//       )}
-//       <span>{actor.name}</span>
-//       <p>Character: {actor.character}</p>
-//     </li>
-//   ))}
-// </ul>
-      //   </div>
-      <MovieCast cast={cast} />
-)}
-
-    {reviewsFetched? (
-  loadingReviews? (
-    <p>Loading reviews...</p>
-  ) : (
-    reviews.length > 0? (
-      // <div>
-      //   <h3>Reviews:</h3>
-      //   <ul>
-      //     {reviews.map(review => (
-      //       <li key={review.movieId}>
-      //         <h2>Author: {review.author}</h2>
-      //         <p>{review.content}</p>
-      //       </li>
-      //     ))}
-      //   </ul>
-            // </div>
-            <MovieReviews reviews={reviews} />
-    ) : (
-      <p>We don't have any reviews for this movie.</p>
-    )
-  )
-) : null}
+      )}
+      <hr />
+      <p>Additional information</p>
+      <div>
+        <NavLink to="cast">Cast</NavLink>
+        <NavLink to="reviews">Reviews</NavLink>
+      </div>
+      <hr />
+      <Outlet />
     </div>
   );
 }
