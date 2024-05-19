@@ -1,7 +1,8 @@
+// MoviesPage.jsx
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import MovieList from '../../components/MovieList/MovieList'; // Переконайтесь, що шлях до компонента вірний
+import MovieList from '../../components/MovieList/MovieList';
 import SearchMovies from '../../components/SearchMovies/SearchMovies';
 
 const MoviesPage = () => {
@@ -11,6 +12,11 @@ const MoviesPage = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      if (!query) {
+        setMovies([]);
+        return;
+      }
+
       try {
         const response = await axios.get('https://api.themoviedb.org/3/search/movie', {
           params: {
