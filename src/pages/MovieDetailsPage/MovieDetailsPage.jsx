@@ -7,7 +7,7 @@ import NavLink from '../../components/Navigation/NavLink';
 
 export default function MovieDetailsPage() {
   const location = useLocation();
-  const from = useRef(location.state?.from || '/');
+  const from = useRef(location.state || '/');
   let { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
 
